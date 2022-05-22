@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dnd_books/view/view.dart';
+import 'package:dnd_books/model/model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,11 +38,33 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            BookTile(),
-          ],
+        // child: Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: const <Widget>[
+        //     BookTile(
+        //       bookTitle: 'Player\'s Handbook',
+        //       publishedDate: 'August 19, 2014',
+        //       imageUrl:
+        //           'https://cdn11.bigcommerce.com/s-9im8f1/images/stencil/1280x1280/products/4097/1583/81pViXqeVLL__74431.1587749379.jpg?c=2',
+        //     ),
+        //     BookTile(
+        //       bookTitle: 'Monster Manual',
+        //       publishedDate: 'September 30, 2014',
+        //       imageUrl:
+        //           'https://www.boardgamequest.com/wp-content/uploads/2015/01/Monster-Manual-Cover-Art.jpg',
+        //     ),
+        //   ],
+        // ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
+          itemCount: Data().books.length,
+          itemBuilder: (context, index) {
+            return BookTile(
+                bookTitle: Data().books.elementAt(index).title!,
+                publishedDate: Data().books.elementAt(index).publishedDate!,
+                imageUrl: Data().books.elementAt(index).imageUrl!);
+          },
         ),
       ),
     );
